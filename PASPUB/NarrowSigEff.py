@@ -97,6 +97,7 @@ g3.SetLineWidth(2)
 can = TCanvas('SignalEfficiency','SignalEfficiency',600,600)
 #can.SetGrid()
 can.SetLogy();
+g3.GetXaxis().SetNdivisions(505)
 g3.GetXaxis().SetTitle('Resonance Mass [GeV]')
 g3.GetYaxis().SetTitle('A#times#epsilon')
 g3.GetYaxis().SetNdivisions(505)
