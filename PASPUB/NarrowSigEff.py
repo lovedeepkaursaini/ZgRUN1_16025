@@ -1,7 +1,8 @@
 #!usr/bin/python
 import sys, math
 import ROOT
-from ROOT import TFile, TH1F, TF1, TCanvas, TLegend, TGraphErrors, gROOT, gPad
+from ROOT import gStyle
+from ROOT import TFile, TH1F, TF1, TCanvas, TLegend, TGraphErrors, gROOT, gPad, TStyle
 from array import array
 import CMS_lumi, tdrstyle
 
@@ -12,14 +13,14 @@ tdrstyle.setTDRStyle()
 #change the CMS_lumi variables (see CMS_lumi.py)
 CMS_lumi.lumi_8TeV = ""
 CMS_lumi.writeExtraText = 1
-CMS_lumi.extraText = "Simulation Preliminary"
+CMS_lumi.extraText = "Simulation"
 CMS_lumi.lumi_sqrtS = "8 TeV" # used with iPeriod = 0, e.g. for simulation-only plots (default is an empty string)
 iPos = 0
 if( iPos==0 ): CMS_lumi.relPosX = 0.12
 iPeriod =2
 
-#gStyle.SetPadRightMargin(0.06)
-#gStyle.SetPadTopMargin(0.06)
+gStyle.SetPadRightMargin(0.06)
+gStyle.SetPadTopMargin(0.06)
 
 mass = [750,1000,1500,2000,2500,3000,3500]
 ABeffi = [0.0930282,0.159127,0.179342,0.183382, 0.175388, 0.152587, 0.113807, 0.0720345]
@@ -98,11 +99,11 @@ can = TCanvas('SignalEfficiency','SignalEfficiency',600,600)
 #can.SetGrid()
 can.SetLogy();
 g3.GetXaxis().SetNdivisions(505)
-g3.GetXaxis().SetTitle('Resonance Mass [GeV]')
-g3.GetYaxis().SetTitle('A#times#epsilon')
+g3.GetXaxis().SetTitle('Resonance mass [GeV]')
+g3.GetYaxis().SetTitle('A#times#varepsilon')
 g3.GetYaxis().SetNdivisions(505)
 g2.GetYaxis().SetNdivisions(505)
-g3.GetXaxis().SetRangeUser(650,2500)
+g3.GetXaxis().SetRangeUser(650,3000)
 g3.GetYaxis().SetRangeUser(0.0001,1)
 #g1.Fit("pol3");
 f4 = TF1("f4","pol3",0,10000)
@@ -121,7 +122,7 @@ g3.SetLineColor(ROOT.kBlack)
 g3.Draw('text,APE')
 g2.Draw('samePE')
 
-leg = TLegend(0.2,0.25,0.5,0.4,"#frac{#Gamma}{m}=0.014%")
+leg = TLegend(0.2,0.25,0.5,0.4,"Narrow signal model")
 #leg.AddEntry(g1,'Z-tagging','LP')
 leg.AddEntry(g3,'anti-b-tag category','LP')
 leg.AddEntry(g2,'b-tag category','LP')
